@@ -1,3 +1,4 @@
+<!-- answer.php -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,26 +34,31 @@
       </div>
 
       <div class="page-content">
-        <h5>Select the kind of number you would like to generate:</h5>
+        <?php
+        if (isset($_POST['kind-of-number'])) {
+          $choice = $_POST['kind-of-number'];
 
-        <form action="answer.php" method="post">
-          <!-- Positive Option -->  
-          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="positive">
-            <input type="radio" id="positive" class="mdl-radio__button" name="kind-of-number" value="positive" required>
-            <span class="mdl-radio__label">Positive Number</span>
-          </label>
-          <!-- Negative Option -->
-          <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="negative">
-            <input type="radio" id="negative" class="mdl-radio__button" name="kind-of-number" value="negative">
-            <span class="mdl-radio__label">Negative Number</span>
-          </label>
-          <br><br>
+          if ($choice === "positive") {
+            $randomNumber = rand(1, 9);
+            echo "<h5>You chose a Positive Number.</h5>";
+          } elseif ($choice === "negative") {
+            $randomNumber = rand(-9, -1);
+            echo "<h5>You chose a Negative Number.</h5>";
+          } else {
+            $randomNumber = 0;
+            echo "<h5>Invalid option selected.</h5>";
+          }
 
-          <!-- Submit Button -->
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">
-            GENERATE
-          </button>
-        </form>
+          echo "<h5>Generated number: $randomNumber</h5>";
+        } else {
+          echo "<h5>No option selected.</h5>";
+        }
+        ?>
+
+        <br>
+        <a href="index.php" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+          Return
+        </a>
       </div>
     </main>
   </div>
